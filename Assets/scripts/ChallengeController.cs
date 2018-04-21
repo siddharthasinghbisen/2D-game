@@ -9,7 +9,7 @@ public class ChallengeController : MonoBehaviour {
     public float frequency = 0.3f;
     float counter = 0.0f;
     public Transform challengesSpawnPoint;
-
+    bool isGameOver = false;
 	// Use this for initialization
 	void Start () {
         GenerateRandomChallenge();
@@ -17,6 +17,7 @@ public class ChallengeController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (isGameOver) return;
         //generete objects
         if (counter <= 0.0f)
         {
@@ -47,6 +48,11 @@ public class ChallengeController : MonoBehaviour {
         GameObject newChallenge = Instantiate(challenges[Random.Range(0, challenges.Length)], challengesSpawnPoint.position, Quaternion.identity) as GameObject;
         newChallenge.transform.parent = transform;
         counter = 1.0f;
+
+    }
+    public void GameOver()
+    {
+        isGameOver = true;
     }
 }
 
